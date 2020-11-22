@@ -17,6 +17,11 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds');
 const reviewRoutes = require('./routes/reviews');
 
+// if (process.env.NODE_ENV !== "production") {
+//   require('dotenv').config();
+// }
+
+
 // 🧨 CONNECT TO MONGODB ATLAS 🧨
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -57,7 +62,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-  
+
   res.locals.currentUser = req.user;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
